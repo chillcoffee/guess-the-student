@@ -16,9 +16,10 @@ class QuizBrain:
     def next_question(self):
         self.current_question = self.question_list[self.question_number]
         self.question_number += 1
-        q_text = html.unescape(self.current_question.text)
-
-        return f"{self.question_number}. {q_text}"
+        #q_text = html.unescape(self.current_question.text)
+        q_image = self.current_question.image
+        print(q_image)
+        return q_image
 
     def printChoices(self, choices):
         random.shuffle(choices)
@@ -30,6 +31,9 @@ class QuizBrain:
         return correct_letter
 
     def show_question(self, ):
+        """
+            showing question for multiple choice questions
+        """
         self.current_question = self.question_list[self.question_number]
         self.question_number += 1
         q_text = html.unescape(self.current_question.text)

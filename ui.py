@@ -18,15 +18,12 @@ class QuizInterface:
         self.label_score = Label(text="Score: ", fg="WHITE", bg=THEME_COLOR, font=("Arial", 14, "bold"))
         self.label_score.grid(row=0, column=1, pady=20)
 
+
+        self.photo = PhotoImage(file="images/scientists/"+'Gates, Bill.png')
         self.canvas = Canvas(width=300, height=250, bg="WHITE")
+        self.image_square = self.canvas.create_image(300/2, 250/2, image=self.photo)
         self.canvas.grid(row=1, column=0, columnspan=2, pady=20)
-        self.question_text = self.canvas.create_text(
-            150, 125,
-            width=280,
-            text="Some Question Text",
-            fill=THEME_COLOR,
-            font=("Calibri", 18, "italic")
-        )
+
 
 #-----------------------your answer--------------------------------------------------------#
         self.label_question = Label(text="Who is this? ", fg="WHITE", bg=THEME_COLOR, font=("Monotype Corsiva", 18, "bold"))
@@ -60,13 +57,15 @@ class QuizInterface:
         self.label_score.config(text=f"Score: {self.quiz.score}")
         if self.quiz.still_has_questions():
             self.canvas.config(bg="white")
-            q_text = self.quiz.next_question()
-            self.canvas.itemconfig(self.question_text, text=q_text)
+            q_image = self.quiz.next_question()
+            self.photo = PhotoImage(file="images/scientists/" + q_image)
+            # self.canvas.itemconfig(self.question_text, text=q_text)
+            self.canvas.itemconfig(self.image_square, image=self.photo)
         else:
             self.tf_score = self.quiz.score
             with open("result.txt", mode="a") as file:
                 file.write(f"\n\nTest I. True or False\nScore: {self.quiz.score}\n")
-            self.canvas.itemconfig(self.question_text, text=f"Your score: {self.quiz.score}/30")
+            #show final score here if there is
             self.canvas.config(bg="white")
             self.button_true.config(state="disabled")
             self.button_false.config(state="disabled")

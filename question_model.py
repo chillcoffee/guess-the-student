@@ -1,7 +1,7 @@
 class Question:
 
 
-    def __init__(self, q_text, q_answer, q_choices):
+    def __init__(self, q_text, q_answer, q_image_filename):
         self.text = q_text
         self.answer = q_answer
-        self.choices = q_choices
+        self.image = q_image_filename

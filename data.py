@@ -11,6 +11,7 @@ for i in range(len(lastnames)):
     dict_name = {}
     dict_name['lastname'] = lastnames[i]
     dict_name['firstname'] = firstnames[i]
+    dict_name['image'] = lastnames[i] + ', '+firstnames[i]+'.png'
     question_data.append(dict_name)
 
 print(question_data)
