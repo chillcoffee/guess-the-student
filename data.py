@@ -1,24 +1,16 @@
-from load_names import *
+import pandas
 
-list_names = get_from_csv()
-lastnames = list_names['Lastname']
-firstnames = list_names['Firstname']
+question_data = []
 
-name = {}
-
-
+df = pandas.read_csv('sections/scientists.csv')
+lastnames = df ['Lastname'].tolist()
+firstnames = df ['Firstname'].tolist()
 
 
-question_data = [
-    {
-        'lastname': 'Resentes',
-        'firstname': 'Ruffa',
-        'nickname': 'Nickname',
-    },
-    {'lastname': 'Reyes',
-     'firstname': 'Elaris',
-     'nickname': 'Ela'},
-    {'lastname': 'Reyes',
-     'firstname': 'Ruffino',
-     'nickname': 'Ino'}
-]
+for i in range(len(lastnames)):
+    dict_name = {}
+    dict_name['lastname'] = lastnames[i]
+    dict_name['firstname'] = firstnames[i]
+    question_data.append(dict_name)
+
+print(question_data)
