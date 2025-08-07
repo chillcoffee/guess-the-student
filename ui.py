@@ -66,6 +66,9 @@ class QuizInterface:
             with open("result.txt", mode="a") as file:
                 file.write(f"\n\nTest I. True or False\nScore: {self.quiz.score}\n")
             #show final score here if there is
+            self.canvas.create_text(150, 50, text=f"{self.quiz.score}/{len(self.quiz.question_list)}", font=("Monotype Corsiva", 24, "bold"))
+            self.end_photo = PhotoImage(file="images/end_photo.png")
+            self.canvas.itemconfig(self.image_square, image=self.end_photo)
             self.canvas.config(bg="white")
             self.button_true.config(state="disabled")
             self.button_false.config(state="disabled")
@@ -75,7 +78,9 @@ class QuizInterface:
         self.give_feedback(is_right)
 
     def click_true(self):
-        self.give_feedback(self.quiz.check_answer("True"))
+        user_answer = self.entry_answer.get().strip()
+        self.give_feedback(self.quiz.check_answer(user_answer))
+        self.entry_answer.delete(0, "end")
 
     def give_feedback(self, is_right):
         if is_right:
